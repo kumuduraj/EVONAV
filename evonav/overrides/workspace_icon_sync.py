@@ -48,5 +48,9 @@ def on_workspace_update(doc, method=None):
     doc.db_set("icon", custom_icon, update_modified=False)
 
     # Clear sidebar cache so the new icon renders on next desk load.
-    frappe.cache().delete_value("workspace_sidebar_items")
+    # frappe.cache() (method) deprecated in v15+; fall back if needed.
+    try:
+        frappe.cache().delete_value("workspace_sidebar_items")
+    except TypeError:
+        frappe.cache.delete_value("workspace_sidebar_items")
     frappe.clear_cache(doctype="Workspace")

@@ -12,13 +12,14 @@
 
 (function () {
     "use strict";
+    var DEBUG = false;
 
     if (window.__evonav_navbar_hide_installed) return;
     window.__evonav_navbar_hide_installed = true;
 
     var labels = (frappe && frappe.boot && frappe.boot.evonav_navbar_hide_labels) || [];
     if (!labels.length) {
-        console.log("[evonav] navbar_hide: no labels configured, skipping");
+        if (DEBUG) console.log("[evonav] navbar_hide: no labels configured, skipping");
         return;
     }
 
@@ -60,9 +61,13 @@
     observer.observe(document.body, { childList: true, subtree: true });
 
     // Also re-sweep on every Frappe route change (extra safety).
-    if (window.frappe && frappe.router && frappe.router.on) {
-        frappe.router.on("change", hideMatchingItems);
-    }
+    // Guard for v16 API: frappe.router.on may be frappe.router.events.on.
+    try {
+        if (window.frappe && frappe.router) {
+            var router = frappe.router.events || frappe.router;
+            if (router.on) router.on("change", hideMatchingItems);
+        }
+    } catch (e) { /* router hook not critical */ }
 
-    console.log("[evonav] navbar_hide: installed with labels =", labels);
+    if (DEBUG) console.log("[evonav] navbar_hide: installed with labels =", labels);
 })();

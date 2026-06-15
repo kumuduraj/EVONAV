@@ -13,7 +13,8 @@
 
 (function () {
     "use strict";
-    console.log("[evonav] loader: script executed");
+    var DEBUG = false;
+    if (DEBUG) console.log("[evonav] loader: script executed");
 
     function inject() {
         if (window.__evonav_navbar_hide_injected) return true;
@@ -24,7 +25,7 @@
         s.textContent = src;
         document.head.appendChild(s);
         window.__evonav_navbar_hide_injected = true;
-        console.log("[evonav] loader: navbar_hide payload injected");
+        if (DEBUG) console.log("[evonav] loader: navbar_hide payload injected");
         return true;
     }
 
@@ -33,7 +34,7 @@
 
     // frappe.boot not ready: poll briefly.
     var attempts = 0;
-    var MAX = 200; // 200 × 50ms = 10s ceiling
+    var MAX = 40; // 40 × 50ms = 2s ceiling
     var iv = setInterval(function () {
         attempts++;
         if (inject() || attempts >= MAX) clearInterval(iv);
