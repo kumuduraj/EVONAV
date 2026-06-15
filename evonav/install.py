@@ -1,5 +1,5 @@
 """
-setup.py — install/uninstall hooks.
+install.py — install/uninstall hooks.
 
 after_install creates the Evonav Settings Single with default hide-labels
 ("About", "Help", "Frappe Support") and the navbar-hide feature enabled.

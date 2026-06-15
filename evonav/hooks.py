@@ -50,5 +50,5 @@ fixtures = [
 # Setup hooks — after install, create the default Evonav Settings Single
 # with sensible defaults (About / Help / Frappe Support hidden).
 # ─────────────────────────────────────────────────────────────────────────────
-after_install = "evonav.setup.after_install"
-before_uninstall = "evonav.setup.before_uninstall"
+after_install = "evonav.install.after_install"
+before_uninstall = "evonav.install.before_uninstall"

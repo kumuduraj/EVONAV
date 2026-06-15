@@ -1,0 +1,6 @@
+app_name = "evonav"
+app_title = "Evonav"
+app_publisher = "Evonet"
+app_description = "Frappe Desk navbar/sidebar tweaks"
+app_email = "admin@evonet.lk"
+app_license = "MIT"
