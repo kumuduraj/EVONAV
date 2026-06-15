@@ -1,0 +1,26 @@
+/*
+ * navbar_hide.css — CSS-side reinforcement for navbar item hiding.
+ *
+ * The JS payload sets data-evonav-hidden="true" on hidden elements. This
+ * CSS guarantees they stay hidden even if some other script clears the
+ * inline style="display:none". CSS specificity acts as a safety net.
+ */
+
+[data-evonav-hidden="true"] {
+    display: none !important;
+}
+
+/*
+ * Optional: pre-emptive hide on first paint to avoid flash-of-visible
+ * before the JS payload runs. Uncomment the block below and add specific
+ * known-stable selectors if you experience FOUC on the default hide list.
+ *
+ * Example for Frappe v16 default navbar (selectors may shift between
+ * versions — verify with DevTools before enabling):
+ */
+/*
+.navbar a[href*="/about"],
+.navbar a[href*="/help"] {
+    display: none !important;
+}
+*/
