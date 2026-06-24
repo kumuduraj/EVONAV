@@ -37,7 +37,7 @@
    "label": "Enable Navbar Hide"
   },
   {
-   "default": "About\nHelp\nFrappe Support",
+    "default": "About\nHelp\nFrappe Support\nReset Desktop Layout",
    "description": "One label per line. Matching is case-insensitive against the visible text of navbar links and dropdown items.",
    "fieldname": "navbar_hide_labels",
    "fieldtype": "Small Text",

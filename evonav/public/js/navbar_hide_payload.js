@@ -27,8 +27,17 @@
     var lowerLabels = labels.map(function (l) { return l.toLowerCase().trim(); });
 
     function hideMatchingItems() {
-        // Selectors cover the common navbar element types in Frappe v15/v16.
+        // Selectors cover all navbar element types in Frappe v15/v16:
+        //   - Top navbar Help dropdown (#toolbar-help) and User dropdown (#toolbar-user)
+        //   - Sidebar context menu (.frappe-menu) created by frappe.ui.create_menu()
+        //   - Generic dropdown-menu items as fallback
         var selectors = [
+            "#toolbar-help .dropdown-item",
+            "#toolbar-user .dropdown-item",
+            ".dropdown-help .dropdown-menu .dropdown-item",
+            ".dropdown-navbar-user .dropdown-menu .dropdown-item",
+            ".frappe-menu .dropdown-menu-item",
+            ".frappe-menu .menu-item-title",
             ".navbar a",
             ".navbar .dropdown-item",
             ".dropdown-menu a",
@@ -44,9 +53,9 @@
             if (lowerLabels.indexOf(text) !== -1) {
                 el.style.display = "none";
                 el.setAttribute("data-evonav-hidden", "true");
-                // Hide the wrapping <li> if present so the gap also collapses.
-                var li = el.closest("li");
-                if (li) li.style.display = "none";
+                // Hide the wrapping container so the gap also collapses.
+                var container = el.closest("li, .dropdown-menu-item, .nav-item");
+                if (container) container.style.display = "none";
             }
         });
     }

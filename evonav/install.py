@@ -10,7 +10,8 @@ import frappe
 
 DEFAULT_HIDE_LABELS = """About
 Help
-Frappe Support"""
+Frappe Support
+Reset Desktop Layout"""
 
 
 def after_install():
